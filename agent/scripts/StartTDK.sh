@@ -1,5 +1,17 @@
 #!/bin/bash
 
+#
+# ============================================================================
+# COMCAST C O N F I D E N T I A L AND PROPRIETARY
+# ============================================================================
+# This file (and its contents) are the intellectual property of Comcast.  It may
+# not be used, copied, distributed or otherwise  disclosed in whole or in part
+# without the express written permission of Comcast.
+# ============================================================================
+# Copyright (c) 2014 Comcast. All rights reserved.
+# ============================================================================
+#
+
 #Setting up environment to run TDK
 export TDK_PATH=/opt/TDK
 export RDK_LOG_PATH=/opt/logs
@@ -29,4 +41,5 @@ echo "Going to system data details script "
 sh sysDataDetails.sh > trDetails.log
 echo "Going to start Agent"
 cd $TDK_PATH/
-./agent
+sh TDKagentMonitor.sh &
+./rdk_tdk_agent_process

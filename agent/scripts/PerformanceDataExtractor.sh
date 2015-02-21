@@ -1,3 +1,4 @@
+#!/bin/sh
 #
 # ============================================================================
 # COMCAST C O N F I D E N T I A L AND PROPRIETARY
@@ -10,14 +11,25 @@
 # ============================================================================
 #
 
-echo "Stopping TDK Agent.."
+export PATH=$PATH:/usr/local/bin:/usr/local/lib:/usr/local/lib/sa
 
-sleep 1
+cd $TDK_PATH
 
-#Killing inactive TDK processes
-ps -ef | grep "agent" | grep -v "grep" | grep -v "tr69agent" | awk '{print $2}' | xargs kill -9 >& /dev/null
-ps -ef | grep "tftp" | grep -v "grep" | awk '{print $2}' | xargs kill -9 >& /dev/null
-ps -ef | grep "/opt/TDK/" | grep -v "grep" | awk '{print $2}' | xargs kill -9 >& /dev/null
-sleep 2
+rm cpu.log memused.log
 
-echo "Done"
+while read line
+do
+
+    sed -e '0,/Average:        CPU/d' -e '/Average:         eth1/,$d' sysStatAvg.log > performance.temp
+
+    cat performance.temp | awk 'BEGIN { RS="" ; FS="\n" } { print $2 }' | awk '{print $8}' >> cpu.log
+
+    cat performance.temp  | awk 'BEGIN { RS="" ; FS="\n" } { print $8 }' | awk '{print$2,$3,$4}' >> memused.log
+
+    sed -e '1,25d' < sysStatAvg.log > temp
+
+    mv temp sysStatAvg.log
+
+done < sysStatAvg.log
+
+echo "Performance data Extracted"
