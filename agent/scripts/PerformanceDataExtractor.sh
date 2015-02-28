@@ -20,11 +20,11 @@ rm cpu.log memused.log
 while read line
 do
 
-    sed -e '0,/Average:        CPU/d' -e '/Average:         eth1/,$d' sysStatAvg.log > performance.temp
+    sed -e '0,/Average:        CPU/d' -e '/Average:         eth0/,$d' sysStatAvg.log > performance.temp
 
-    cat performance.temp | awk 'BEGIN { RS="" ; FS="\n" } { print $2 }' | awk '{print $8}' >> cpu.log
+    cat performance.temp | awk 'BEGIN { RS="" ; FS="\n" } { print $1 }' | awk '{print $8}' >> cpu.log
 
-    cat performance.temp  | awk 'BEGIN { RS="" ; FS="\n" } { print $8 }' | awk '{print$2,$3,$4}' >> memused.log
+    cat performance.temp  | awk 'BEGIN { RS="" ; FS="\n" } { print $7 }' | awk '{print$2,$3,$4}' >> memused.log
 
     sed -e '1,25d' < sysStatAvg.log > temp
 
