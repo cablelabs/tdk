@@ -15,18 +15,21 @@ export PATH=$PATH:/usr/local/bin:/usr/local/lib:/usr/local/lib/sa
 
 cd $TDK_PATH
 
-rm cpu.log memused.log
+ITERATION=`cat sysStatAvg.log | awk ' /ITERATION/ { print $0 }' | wc -l`
+TOTAL_LINES=`cat sysStatAvg.log | wc -l`
+LINE_COUNT=$(($TOTAL_LINES / $ITERATION))
+
 
 while read line
 do
 
-    sed -e '0,/Average:        CPU/d' -e '/Average:         eth0/,$d' sysStatAvg.log > performance.temp
+    sed -e '0,/Average:        CPU/d' -e '/ITERATION/,$d' sysStatAvg.log > performance.temp
 
-    cat performance.temp | awk 'BEGIN { RS="" ; FS="\n" } { print $1 }' | awk '{print $8}' >> cpu.log
+    cat performance.temp | awk 'BEGIN { RS="" ; FS="\n" } { print $2 }' | awk '{print $8}' >> cpu.log
 
-    cat performance.temp  | awk 'BEGIN { RS="" ; FS="\n" } { print $7 }' | awk '{print$2,$3,$4}' >> memused.log
+    cat performance.temp  | awk 'BEGIN { RS="" ; FS="\n" } { print $4 }' | awk '{print$2,$3,$4}' >> memused.log
 
-    sed -e '1,25d' < sysStatAvg.log > temp
+    sed -e '1,'$LINE_COUNT'd' < sysStatAvg.log > temp
 
     mv temp sysStatAvg.log
 
