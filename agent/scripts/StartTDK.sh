@@ -22,6 +22,7 @@ chmod 777 -R $TDK_PATH/opensourcecomptest/
 export LD_LIBRARY_PATH=$TDK_PATH/libs/:/usr/local/lib/:/usr/local/Qt/lib/:/mnt/nfs/lib:/mnt/nfs/bin/target-snmp/lib/:/mnt/nfs/bin:/usr/local/lib/sa:$LD_LIBRARY_PATH
 export GST_PLUGIN_PATH=$GST_PLUGIN_PATH:/lib/gstreamer-0.10:/usr/local/lib/gstreamer-0.10:/mnt/nfs/gstreamer-plugins
 export GST_REGISTRY=$:/home/.gst-registry.dat
+export XDISCOVERY_PATH=/etc/
 
 #Setting up environment to run rmfApp
 export PFC_ROOT=/
