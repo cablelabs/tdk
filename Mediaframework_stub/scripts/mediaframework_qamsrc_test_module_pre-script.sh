@@ -1,4 +1,4 @@
-LOGPATH=/opt/TDK/
+LOGPATH=$TDK_PATH
 LOGFILE=logs/Mediaframework_qamsrc_testmodule_postreq_details.log
 rm $LOGPATH/$LOGFILE
 touch $LOGPATH/$LOGFILE

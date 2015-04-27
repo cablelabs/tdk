@@ -13,9 +13,9 @@
 #
 
 #Setting up environment to run TDK
-export TDK_PATH=/opt/TDK
+export TDK_PATH=/var/TDK/
 export RDK_LOG_PATH=/opt/logs
-export PATH=$PATH:/usr/local/bin
+export PATH=$PATH:/usr/local/bin:$TDK_PATH
 export TDK_LIB_PATH=$TDK_PATH/libs/
 export OPENSOURCETEST_PATH=$TDK_PATH/opensourcecomptest/
 chmod 777 -R $TDK_PATH/opensourcecomptest/
