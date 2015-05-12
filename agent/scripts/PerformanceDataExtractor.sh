@@ -23,7 +23,7 @@ LINE_COUNT=$(($TOTAL_LINES / $ITERATION))
 while read line
 do
 
-    sed -e '0,/Average:        CPU/d' -e '/ITERATION/,$d' sysStatAvg.log > performance.temp
+    sed -e '/ITERATION/,$d' sysStatAvg.log > performance.temp
 
     cat performance.temp | awk 'BEGIN { RS="" ; FS="\n" } { print $2 }' | awk '{print $8}' >> cpu.log
 
