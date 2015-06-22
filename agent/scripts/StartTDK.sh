@@ -42,5 +42,7 @@ echo "Going to system data details script "
 sh sysDataDetails.sh > trDetails.log
 echo "Going to start Agent"
 cd $TDK_PATH/
+#copying sidb.xml from /usr/bin to TDK_PATH
+cp /usr/bin/sidb.xml $TDK_PATH
 sh TDKagentMonitor.sh &
 ./rdk_tdk_agent_process
