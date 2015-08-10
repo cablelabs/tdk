@@ -9,15 +9,5 @@
 # ============================================================================
 # Copyright (c) 2014 Comcast. All rights reserved.
 # ============================================================================
-
-cmd=$(/bin/HOMIE.sh 0 0 -si)
-echo $cmd | grep 'It appears as though video is working fine.' >>/dev/null
-if [ $? -eq 0 ]
-then
 echo "SUCCESS"
-else
-#This script always return SUCCESS, since platform specific script to check video status is not available
-#echo "FAILURE"
-echo "SUCCESS"
-fi
 
