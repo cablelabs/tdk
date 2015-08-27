@@ -11,7 +11,7 @@
 #
 
 echo "Stopping TDK Agent.."
-export TDK_PATH=/var/TDK
+export TDK_PATH=/opt/TDK
 
 sleep 1
 

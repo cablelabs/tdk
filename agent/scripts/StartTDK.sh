@@ -13,7 +13,7 @@
 #
 
 #Setting up environment to run TDK
-export TDK_PATH=/var/TDK/
+export TDK_PATH=/opt/TDK/
 export RDK_LOG_PATH=/opt/logs
 export PATH=$PATH:/usr/local/bin:$TDK_PATH
 export TDK_LIB_PATH=$TDK_PATH/libs/
