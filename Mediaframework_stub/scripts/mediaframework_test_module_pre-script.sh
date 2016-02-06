@@ -65,6 +65,19 @@ done
 #	fi
 #done
 
+#Checking whether RMF streamer is running or not
+echo "Going to check rmfStreamer"
+VALUE=0
+ps -ef | grep rmfStreamer | grep -v grep
+if [[ "$?" = "$VALUE" ]]; then
+echo "rmfStreamer running"
+else
+echo "rmfStreamer not running"
+touch $LOG_PATH/$LOGFILE
+echo "FAILURE<details>RMF_STREAMER_NOT_RUNNING" > $LOG_PATH/$LOGFILE
+exit 1
+fi
+
 /etc/init.d/xre-service stop
 if [ $? -eq 0 ]
 then
