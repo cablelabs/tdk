@@ -9,5 +9,13 @@
 # ============================================================================
 # Copyright (c) 2014 Comcast. All rights reserved.
 # ============================================================================
+
+cmd=$(cat /opt/AVstatus.dat)
+echo $cmd | grep 'Video:SUCCESS' >>/dev/null
+if [ $? -eq 0 ]
+then
 echo "SUCCESS"
+else
+echo "FAILURE"
+fi
 
