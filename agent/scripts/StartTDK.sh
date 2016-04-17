@@ -39,9 +39,10 @@ export GST_PLUGIN_PATH GST_PLUGIN_SCANNER GST_REGISTRY
 export PATH HOME LD_LIBRARY_PATH
 ulimit -c unlimited
 echo "Going to system data details script "
+chmod -R 0755 $TDK_PATH/
+cd $TDK_PATH/
 sh sysDataDetails.sh > trDetails.log
 echo "Going to start Agent"
-cd $TDK_PATH/
 #copying sidb.xml from /usr/bin to TDK_PATH
 cp /usr/bin/sidb.xml $TDK_PATH
 sh TDKagentMonitor.sh &
