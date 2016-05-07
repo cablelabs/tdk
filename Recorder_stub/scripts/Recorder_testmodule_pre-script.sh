@@ -61,6 +61,28 @@ else
         exit 1
      fi
 fi
+
+rmf_flags="FEATURE.SECURE_RWS.POST.URL"
+FLAG_SEARCH_STATUS=`grep $rmf_flags=http://$IP:8080/DVRSimulator/recorder/status $TARGET_PATH/rmfconfig.ini|wc -l`
+if [ $FLAG_SEARCH_STATUS -ne 0 ]
+then
+     echo $rmf_flags "is found in rmfconfig.ini"
+else
+     #Editing the flag to false
+     IP=$(awk -F"@" '/Manager IP/{ip=$2}END{print ip}' $TDK_PATH/tdkconfig.ini )
+     echo $IP
+     sed -i -e "s#$rmf_flags=.*#$rmf_flags=http://$IP:8080/DVRSimulator/recorder/status#g" $TARGET_PATH/rmfconfig.ini
+     if [ $? -eq 0 ]
+     then
+        echo "rmfconfig.ini file edited"
+        REBOOT="TRUE"
+     else
+        echo "sed utillity is not found"
+        touch $TDK_PATH/logs/Recorder_testmodule_prereq_details.log;
+        echo  "FAILURE<DETAILS>sed utillity is not found" >> $TDK_PATH/logs/Recorder_testmodule_prereq_details.log
+        exit 1
+     fi
+fi
 rmf_flags="FEATURE.RWS.GET.URL"
 FLAG_SEARCH_STATUS=`grep $rmf_flags=http://$IP:8080/DVRSimulator/recorder/updateSchedule $TARGET_PATH/rmfconfig.ini|wc -l`
 if [ $FLAG_SEARCH_STATUS -ne 0 ]
@@ -82,6 +104,29 @@ else
         exit 1
      fi
 fi
+
+rmf_flags="FEATURE.SECURE_RWS.GET.URL"
+FLAG_SEARCH_STATUS=`grep $rmf_flags=http://$IP:8080/DVRSimulator/recorder/updateSchedule $TARGET_PATH/rmfconfig.ini|wc -l`
+if [ $FLAG_SEARCH_STATUS -ne 0 ]
+then
+     echo $rmf_flags is found in rmfconfig.ini
+else
+     #Editing the flag to false
+     IP=$(awk -F"@" '/Manager IP/{ip=$2}END{print ip}' $TDK_PATH/tdkconfig.ini )
+     echo $IP
+     sed -i -e "s#$rmf_flags=.*#$rmf_flags=http://$IP:8080/DVRSimulator/recorder/updateSchedule#g" $TARGET_PATH/rmfconfig.ini
+     if [ $? -eq 0 ]
+     then
+        echo "rmfconfig.ini file edited"
+        REBOOT="TRUE"
+     else
+        echo "sed utillity is not found"
+        touch $TDK_PATH/logs/Recorder_testmodule_prereq_details.log;
+        echo  "FAILURE<DETAILS>sed utillity is not found" >> $TDK_PATH/logs/Recorder_testmodule_prereq_details.log
+        exit 1
+     fi
+fi
+
 rmf_flags="FEATURE.LONGPOLL.END.POINT"
 FLAG_SEARCH_STATUS=`grep $rmf_flags=http://$IP:8080/DVRSimulator/longpollEndPoint $TARGET_PATH/rmfconfig.ini|wc -l`
 if [ $FLAG_SEARCH_STATUS -ne 0 ]
