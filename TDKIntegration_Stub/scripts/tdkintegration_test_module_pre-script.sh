@@ -61,6 +61,17 @@ then
 else
 	echo "xre not stopped"
 fi
-                                                                                                                                
+#Check if rmfstreamer is running andad to Log file if Failure
+echo "Going to check rmfStreamer"
+VALUE=0
+ps -ef | grep rmfStreamer | grep -v grep
+if [[ "$?" = "$VALUE" ]]; then
+        echo "rmfStreamer  running"
+else
+        echo "rmfStreamer not running"
+         touch $LOG_PATH/$LOGFILE
+        echo "FAILURE<details>RMF_STREAMER_NOT_RUNNING" > $LOG_PATH/$LOGFILE
+        exit 1
+fi                                                                                                                               
 
 					
