@@ -32,6 +32,8 @@ VALUE=0
 ps -ef | grep rmfStreamer | grep -v grep
 if [[ "$?" = "$VALUE" ]]; then
 echo "rmfStreamer running"
+touch $LOG_PATH/$LOGFILE
+echo  "SUCCESS" > $LOG_PATH/$LOGFILE
 else
 echo "rmfStreamer not running"
 touch $LOG_PATH/$LOGFILE
